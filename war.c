@@ -99,53 +99,57 @@
 #define QTD_TERRITORIOS 5
 
 struct Territorio {
-    char nome[30];  
-    char cor[10];   
-    int tropas;     
+    char nome[30];
+    char cor[10];
+    int tropas;
 };
 
-int main() {   
+int main() {
     struct Territorio territorios[QTD_TERRITORIOS];
+    char entrada[50];
     int i;
 
     printf("=== Cadastro de Territórios do Jogo WAR ===\n\n");
 
- 
     for (i = 0; i < QTD_TERRITORIOS; i++) {
         printf("---- Território %d ----\n", i + 1);
 
-     
+        // Nome
         printf("Digite o nome do território: ");
-        scanf(" %29[^\n]", territorios[i].nome);
+        fgets(territorios[i].nome, sizeof(territorios[i].nome), stdin);
+        territorios[i].nome[strcspn(territorios[i].nome, "\n")] = '\0';
 
-      
+        // Cor
         printf("Digite a cor do exército: ");
-        scanf(" %9[^\n]", territorios[i].cor);
+        fgets(territorios[i].cor, sizeof(territorios[i].cor), stdin);
+        territorios[i].cor[strcspn(territorios[i].cor, "\n")] = '\0';
 
-        
-        printf("Digite o número de tropas: ");
+        // Tropas
         while (1) {
-        if (scanf("%d", &territorios[i].tropas) == 1) {
-            break;
-        } else {
-            printf("Entrada inválida. Digite um número inteiro: ");
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF) { }
+            printf("Digite o número de tropas: ");
+            fgets(entrada, sizeof(entrada), stdin);
+            entrada[strcspn(entrada, "\n")] = '\0';
+
+            if (sscanf(entrada, "%d", &territorios[i].tropas) == 1) {
+                break;
+            } else {
+                printf("Entrada inválida. Digite um número inteiro.\n");
+            }
         }
-    }
-        printf("\n"); 
+
+        printf("\n");
     }
 
+    // Exibição
     printf("===== LISTA DE TERRITÓRIOS CADASTRADOS =====\n\n");
     for (i = 0; i < QTD_TERRITORIOS; i++) {
         printf("Território %d:\n", i + 1);
-        printf("  Nome : %s\n", territorios[i].nome);
-        printf("  Cor  : %s\n", territorios[i].cor);
-        printf("  Tropas: %d\n", territorios[i].tropas);
+        printf("  Nome   : %s\n", territorios[i].nome);
+        printf("  Cor    : %s\n", territorios[i].cor);
+        printf("  Tropas : %d\n", territorios[i].tropas);
         printf("-------------------------------------------\n");
     }
 
     printf("\nCadastro concluído com sucesso!\n");
-
     return 0;
 }
