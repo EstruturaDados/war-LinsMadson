@@ -31,7 +31,6 @@
 
 // --- Função Principal (main) ---
 // Função principal que orquestra o fluxo do jogo, chamando as outras funções em ordem.
-int main() {
     // 1. Configuração Inicial (Setup):
     // - Define o locale para português.
     // - Inicializa a semente para geração de números aleatórios com base no tempo atual.
@@ -50,9 +49,6 @@ int main() {
 
     // 3. Limpeza:
     // - Ao final do jogo, libera a memória alocada para o mapa para evitar vazamentos de memória.
-
-    return 0;
-}
 
 // --- Implementação das Funções ---
 
@@ -96,3 +92,60 @@ int main() {
 
 // limparBufferEntrada():
 // Função utilitária para limpar o buffer de entrada do teclado (stdin), evitando problemas com leituras consecutivas de scanf e getchar.
+
+#include <stdio.h>
+#include <string.h>
+
+#define QTD_TERRITORIOS 5
+
+struct Territorio {
+    char nome[30];  
+    char cor[10];   
+    int tropas;     
+};
+
+int main() {   
+    struct Territorio territorios[QTD_TERRITORIOS];
+    int i;
+
+    printf("=== Cadastro de Territórios do Jogo WAR ===\n\n");
+
+ 
+    for (i = 0; i < QTD_TERRITORIOS; i++) {
+        printf("---- Território %d ----\n", i + 1);
+
+     
+        printf("Digite o nome do território: ");
+        scanf(" %29[^\n]", territorios[i].nome);
+
+      
+        printf("Digite a cor do exército: ");
+        scanf(" %9[^\n]", territorios[i].cor);
+
+        
+        printf("Digite o número de tropas: ");
+        while (1) {
+        if (scanf("%d", &territorios[i].tropas) == 1) {
+            break;
+        } else {
+            printf("Entrada inválida. Digite um número inteiro: ");
+            int c;
+            while ((c = getchar()) != '\n' && c != EOF) { }
+        }
+    }
+        printf("\n"); 
+    }
+
+    printf("===== LISTA DE TERRITÓRIOS CADASTRADOS =====\n\n");
+    for (i = 0; i < QTD_TERRITORIOS; i++) {
+        printf("Território %d:\n", i + 1);
+        printf("  Nome : %s\n", territorios[i].nome);
+        printf("  Cor  : %s\n", territorios[i].cor);
+        printf("  Tropas: %d\n", territorios[i].tropas);
+        printf("-------------------------------------------\n");
+    }
+
+    printf("\nCadastro concluído com sucesso!\n");
+
+    return 0;
+}
