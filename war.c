@@ -98,14 +98,14 @@
 
 #define QTD_TERRITORIOS 5
 
-struct Territorio {
+typedef struct {
     char nome[30];
     char cor[10];
     int tropas;
-};
+}territorios;
 
 int main() {
-    struct Territorio territorios[QTD_TERRITORIOS];
+    territorios territorios[QTD_TERRITORIOS];
     char entrada[50];
     int i;
 
