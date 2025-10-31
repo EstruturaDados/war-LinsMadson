@@ -98,13 +98,30 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define QTD_TERRITORIOS 5
 
 typedef struct {
     char nome[30];
     char cor[10];
     int tropas;
 }territorios;
+
+void cadastrarterritorios(territorios *mapa, int qtd){
+    for(int i = 0; i < qtd; i++);{
+    printf("Territorio %d\n", i+1);
+    printf("Digite o nome do Território: ");
+    scanf("%29[^\n]", mapa[i].nome);
+
+    printf("Digite a cor do exercito: ");
+    scanf("%9[^\n]", mapa[i].cor);
+
+    printf("Digite o número de tropas: ");
+    while(scanf("%d", &mapa[i].tropas) !1 = || mapa[i].tropas <= 0){
+        printf("Entrada inválida. Digite um número inteiro positivo: ");
+        while(getchar() != "\n");
+    }
+    printf("\n");
+    }
+}
 
 int main() {
     territorios territorios[QTD_TERRITORIOS];
