@@ -123,6 +123,13 @@ void cadastrarterritorios(territorios *mapa, int qtd){
     }
 }
 
+void exibirterritorios(territorios *mapa, int qtd){
+    printf("\n== Liata de Territórios ==\n");
+    for (int i = 0; i < qtd; i++){
+        printf("[%d] %s - cor: %s - tropas: %d\n")
+    }
+};
+
 int main() {
     territorios territorios[QTD_TERRITORIOS];
     char entrada[50];
