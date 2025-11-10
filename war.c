@@ -116,14 +116,14 @@ int atacar(Territorio* a, Territorio* d) {
     int da = rand() % 6 + 1;
     int dd = rand() % 6 + 1;
 
-    printf("\n🎲 %s tirou %d | %s tirou %d\n",
+    printf("\n%s tirou %d | %s tirou %d\n",
            a->nome, da, d->nome, dd);
 
     if (da > dd) {
         d->tropas--;
-        printf("💥 %s venceu! %s perdeu 1 tropa.\n", a->nome, d->nome);
+        printf("%s venceu! %s perdeu 1 tropa.\n", a->nome, d->nome);
         if (d->tropas <= 0) {
-            printf("🏳️ %s foi conquistado!\n", d->nome);
+            printf("%s foi conquistado!\n", d->nome);
             strcpy(d->cor, a->cor);
             d->tropas = a->tropas / 2;
             if (d->tropas < 1) d->tropas = 1;
@@ -134,7 +134,7 @@ int atacar(Territorio* a, Territorio* d) {
     } else {
         a->tropas--;
         if (a->tropas < 0) a->tropas = 0;
-        printf("🛡️  %s defendeu! %s perdeu 1 tropa.\n", d->nome, a->nome);
+        printf("%s defendeu! %s perdeu 1 tropa.\n", d->nome, a->nome);
     }
     return 0;
 }
@@ -171,7 +171,7 @@ int main() {
 
     char* missao = malloc(100);
     atribuirMissao(missao, n);
-    printf("\n🎯 Missão do jogador: %s\n", missao);
+    printf("\nMissão do jogador: %s\n", missao);
 
     int conquistados = 0, opcao;
     do {
@@ -187,11 +187,11 @@ int main() {
             scanf("%d", &d);
 
             if (a < 1 || a > n || d < 1 || d > n || a == d) {
-                printf("⚠️ Índices inválidos!\n");
+                printf("Índices inválidos!\n");
                 continue;
             }
             if (strcmp(mapa[a - 1].cor, mapa[d - 1].cor) == 0) {
-                printf("⚠️ Não pode atacar território da mesma cor!\n");
+                printf("Não pode atacar território da mesma cor!\n");
                 continue;
             }
 
@@ -199,7 +199,7 @@ int main() {
             if (ganhou) conquistados++;
 
             if (verificarMissao(missao, conquistados)) {
-                printf("\n🏆 Missão cumprida! Você conquistou %d territórios e venceu o jogo!\n", conquistados);
+                printf("\nMissão cumprida! Você conquistou %d territórios e venceu o jogo!\n", conquistados);
                 break;
             }
         }
@@ -207,12 +207,12 @@ int main() {
         if (opcao == 2) {
             int alvo;
             sscanf(missao, "Conquistar %d", &alvo);
-            printf("\n📊 Progresso: %d de %d territórios conquistados.\n", conquistados, alvo);
+            printf("\nProgresso: %d de %d territórios conquistados.\n", conquistados, alvo);
             if (verificarMissao(missao, conquistados)) {
-                printf("🏆 Parabéns! Missão concluída!\n");
+                printf("Parabéns! Missão concluída!\n");
                 break;
             } else {
-                printf("🚫 Missão ainda não concluída.\n");
+                printf("Missão ainda não concluída.\n");
             }
         }
 
